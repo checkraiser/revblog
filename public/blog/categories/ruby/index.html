@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>My Octopress Blog</title>
+  <title>Category: Ruby - My Octopress Blog</title>
   <meta name="author" content="Your Name">
 
   
-  <meta name="description" content="The repository is located here class Ticket attr_accessor :lottery_number, :serial_number def initialize(str) @lottery_number = str[0..-3] @ &hellip;">
+  <meta name="description" content="Category: Ruby">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yoursite.com">
+  <link rel="canonical" href="http://yoursite.comblog/categories/ruby">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
@@ -63,120 +63,40 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article role="article">
   
-  
-  
-    <article>
-      
   <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/11/28/lottery-program-part-1/">Lottery Program (Part 1)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-28T11:25:34-05:00" pubdate data-updated="true">Nov 28<span>th</span>, 2013</time>
-        
-      </p>
+    <h1 class="entry-title">Category: Ruby</h1>
     
   </header>
-
-
-  <div class="entry-content"><p>The repository is located <a href="https://github.com/checkraiser/lottery_program">here</a></p>
-
-<div><script src='https://gist.github.com/7672237.js?file=lottery.rb'></script>
-<noscript><pre><code>class Ticket
-    attr_accessor :lottery_number, :serial_number   
-    def initialize(str)
-        @lottery_number = str[0..-3]
-        @serial_number = str[-2..-1]
-    end
-    def to_s
-        (lottery_number || &quot;&quot;) + (serial_number || &quot;&quot;)
-    end
-end
-class Lottery
-    attr_accessor :tickets
-    def initialize
-        @tickets = Array.new
-    end
-    def import(path)
-         File.readlines(path).
-            #reject { |line| line =~ /^\s*#/ }.
-            map {|line| @tickets &lt;&lt; Ticket.new(line.strip)}
-        return @tickets.map {|t| t.to_s}
-    end
-end</code></pre></noscript></div>
+  
+  <div id="blog-archives" class="category">
 
 
 
+  
+  <h2>2013</h2>
 
-<div><script src='https://gist.github.com/7672237.js?file=lottery_spec.rb'></script>
-<noscript><pre><code>require_relative &#39;./spec_helper&#39;
-describe &quot;Lottery&quot;,  fakefs: true do  
-     def stub_etc_tickets
-        FileUtils.mkdir(&quot;/etc&quot;)
-        File.open(&quot;/etc/tickets&quot;, &quot;w&quot;) do |f|
-            f.puts(&quot;1234512&quot;)
-            f.puts(&quot;9999920&quot;)
-        end
-    end
-    it &quot;should have lottery_number and serial_number&quot; do 
-        l = Ticket.new(&quot;1234512&quot;)
-        l.lottery_number.should  == &quot;12345&quot;
-        l.serial_number.should == &quot;12&quot;
-        l.to_s.should == &quot;1234512&quot;
-    end
-        
-    it &quot;import Lottery from a file text&quot; do
-        stub_etc_tickets                
-        l = Lottery.new
-        l.import(&quot;/etc/tickets&quot;).should == [&quot;1234512&quot;,&quot;9999920&quot;]
-        l.tickets[0].to_s.should == &quot;1234512&quot;
-        l.tickets[1].to_s.should == &quot;9999920&quot;     
-    end
+<article>
+  
+<h1><a href="/blog/2013/11/28/lottery-program-part-1/">Lottery Program (Part 1)</a></h1>
+<time datetime="2013-11-28T11:25:34-05:00" pubdate><span class='month'>Nov</span> <span class='day'>28</span> <span class='year'>2013</span></time>
 
-end
-</code></pre></noscript></div>
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/ruby/'>Ruby</a></span>
+</footer>
 
 
-
-
-<div><script src='https://gist.github.com/7672237.js?file=spec_helper.rb'></script>
-<noscript><pre><code>require &#39;fakefs/spec_helpers&#39;
-RSpec.configure do |config|
-config.include FakeFS::SpecHelpers, fakefs: true
-end
-require_relative &#39;../lib/lottery&#39;
-</code></pre></noscript></div>
-
-
+</article>
 
 </div>
-  
-  
 
-
-    </article>
   
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
+</article>
+
 </div>
+
 <aside class="sidebar">
   
     <section>
@@ -196,6 +116,7 @@ require_relative &#39;../lib/lottery&#39;
 
   
 </aside>
+
 
     </div>
   </div>

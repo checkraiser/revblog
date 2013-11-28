@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ruby | My Octopress Blog]]></title>
+  <link href="http://yoursite.com/blog/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://yoursite.com/"/>
+  <updated>2013-11-28T11:46:59-05:00</updated>
+  <id>http://yoursite.com/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Lottery Program (Part 1)]]></title>
+    <link href="http://yoursite.com/blog/2013/11/28/lottery-program-part-1/"/>
+    <updated>2013-11-28T11:25:34-05:00</updated>
+    <id>http://yoursite.com/blog/2013/11/28/lottery-program-part-1</id>
+    <content type="html"><![CDATA[<p>The repository is located <a href="https://github.com/checkraiser/lottery_program">here</a></p>
+
+<p><div><script src='https://gist.github.com/7672237.js?file=lottery.rb'></script>
+<noscript><pre><code>class Ticket
+	attr_accessor :lottery_number, :serial_number	
+	def initialize(str)
+		@lottery_number = str[0..-3]
+		@serial_number = str[-2..-1]
+	end
+	def to_s
+		(lottery_number || &quot;&quot;) + (serial_number || &quot;&quot;)
+	end
+end
+class Lottery
+	attr_accessor :tickets
+	def initialize
+		@tickets = Array.new
+	end
+	def import(path)
+		 File.readlines(path).
+			#reject { |line| line =~ /^\s*#/ }.
+			map {|line| @tickets &lt;&lt; Ticket.new(line.strip)}
+		return @tickets.map {|t| t.to_s}
+	end
+end</code></pre></noscript></div>
+</p>
+
+<p><div><script src='https://gist.github.com/7672237.js?file=lottery_spec.rb'></script>
+<noscript><pre><code>require_relative &#39;./spec_helper&#39;
+describe &quot;Lottery&quot;,  fakefs: true do 	
+	 def stub_etc_tickets
+		FileUtils.mkdir(&quot;/etc&quot;)
+		File.open(&quot;/etc/tickets&quot;, &quot;w&quot;) do |f|
+			f.puts(&quot;1234512&quot;)
+			f.puts(&quot;9999920&quot;)
+		end
+	end
+	it &quot;should have lottery_number and serial_number&quot; do 
+		l = Ticket.new(&quot;1234512&quot;)
+		l.lottery_number.should  == &quot;12345&quot;
+		l.serial_number.should == &quot;12&quot;
+		l.to_s.should == &quot;1234512&quot;
+	end
+		
+	it &quot;import Lottery from a file text&quot; do
+		stub_etc_tickets				
+		l = Lottery.new
+		l.import(&quot;/etc/tickets&quot;).should == [&quot;1234512&quot;,&quot;9999920&quot;]
+        l.tickets[0].to_s.should == &quot;1234512&quot;
+        l.tickets[1].to_s.should == &quot;9999920&quot;		
+	end
+
+end
+</code></pre></noscript></div>
+</p>
+
+<p><div><script src='https://gist.github.com/7672237.js?file=spec_helper.rb'></script>
+<noscript><pre><code>require &#39;fakefs/spec_helpers&#39;
+RSpec.configure do |config|
+config.include FakeFS::SpecHelpers, fakefs: true
+end
+require_relative &#39;../lib/lottery&#39;
+</code></pre></noscript></div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>
